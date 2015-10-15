@@ -10,7 +10,9 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 
 /**
  *
@@ -19,17 +21,24 @@ import javafx.scene.control.Label;
 public class FXMLDocumentController implements Initializable {
     
     @FXML
-    private Label label;
+    private TextField tf_dest;
+    @FXML
+    WebView wv_maps2;
+    WebEngine webEngine;
+    
     
     @FXML
-    private void handleButtonAction(ActionEvent event) {
-        System.out.println("You clicked me!");
-        label.setText("Hello World!");
+    private void handleButtonTrace(ActionEvent event) {
+        tf_dest.setText("Click");
+        webEngine = wv_maps2.getEngine();
+        webEngine.load("https://www.google.fr");
+        
     }
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        
     }    
     
 }

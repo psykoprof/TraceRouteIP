@@ -9,6 +9,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.InetAddress;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.UnknownHostException;
 import java.util.ResourceBundle;
@@ -20,6 +23,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
+
+import org.json.*;
+
 
 /**
  *
@@ -57,6 +63,23 @@ public class FXMLDocumentController implements Initializable {
                         System.out.println("Erreur getByName");
                     }
                 }
+                
+            try {
+                URI uri = new URI("freegeoip.net/json/"+str);
+                JSONTokener tokener = new JSONTokener(uri.toURL().openStream());
+                JSONObject root = new JSONObject(tokener);
+                
+                
+            } catch (URISyntaxException ex) {
+                Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (JSONException ex) {
+                Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+                
             }
             else
             {

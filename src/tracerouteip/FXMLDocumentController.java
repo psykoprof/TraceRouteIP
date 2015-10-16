@@ -65,6 +65,7 @@ public class FXMLDocumentController implements Initializable {
                 }
                 
             try {
+                //https://code.google.com/p/org-json-java/downloads/list
                 URI uri = new URI("freegeoip.net/json/"+str);
                 JSONTokener tokener = new JSONTokener(uri.toURL().openStream());
                 JSONObject root = new JSONObject(tokener);

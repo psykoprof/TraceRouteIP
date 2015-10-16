@@ -5,7 +5,9 @@
  */
 package tracerouteip;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.InetAddress;
 import java.net.URL;
 import java.net.UnknownHostException;
@@ -49,29 +51,17 @@ public class FXMLDocumentController implements Initializable {
                     System.out.println("Destination URL");
                     try {
                         adrDest = InetAddress.getByName(str);
-                        System.out.println("IP destination : "+adrDest.getHostAddress());
+                        str = adrDest.getHostAddress();
+                        System.out.println("IP destination : "+str);
                     } catch (UnknownHostException ex) {
                         System.out.println("Erreur getByName");
                     }
-                    
                 }
             }
             else
             {
                 System.out.println("Destination VIDE");
             }
-            
-            Runtime runtime = Runtime.getRuntime();
-        try {
-            runtime.exec(new String[] {"ping","www.google.fr"});
-            
-            
-            
-        } catch (IOException ex) {
-            System.out.println("Erreur exec runtime : " + ex.getMessage());
-            
-        }
-        
     }
     
     @Override

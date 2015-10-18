@@ -14,11 +14,11 @@
          <children>
             <VBox prefHeight="376.0" prefWidth="350.0" HBox.hgrow="ALWAYS">
                <children>
-                  <WebView fx:id="wv_maps2" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS" />
+                  <WebView fx:id="wv_maps" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS" />
                   <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="5.0">
                      <children>
                         <Label minWidth="-Infinity" text="Destination : " />
-                        <TextField id="tf_dest" fx:id="tf_dest" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#handleButtonTrace" prefHeight="25.0" prefWidth="240.0" HBox.hgrow="ALWAYS" />
+                        <TextField id="tf_dest" fx:id="tf_dest" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#handleButtonTrace" prefHeight="25.0" prefWidth="240.0" text="www.google.fr" HBox.hgrow="ALWAYS" />
                         <Button id="BU_Trace" minWidth="60.0" mnemonicParsing="false" onAction="#handleButtonTrace" text="Trace" />
                      </children>
                      <padding>

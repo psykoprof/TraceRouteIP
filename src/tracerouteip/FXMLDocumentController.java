@@ -7,12 +7,14 @@ package tracerouteip;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.net.URLConnection;
 import java.net.UnknownHostException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -37,8 +39,9 @@ public class FXMLDocumentController implements Initializable {
     private TextField tf_dest;
     @FXML
     WebView wv_maps;
+    @FXML
     WebEngine webEngine;
-    
+
     InetAddress adrDest;
     
     
@@ -64,23 +67,35 @@ public class FXMLDocumentController implements Initializable {
                     }
                 }
                 
-            try {
+            //try {
                 //https://code.google.com/p/org-json-java/downloads/list
-                URI uri = new URI("freegeoip.net/json/"+str);
-                JSONTokener tokener = new JSONTokener(uri.toURL().openStream());
-                JSONObject root = new JSONObject(tokener);
                 
-                
-            } catch (URISyntaxException ex) {
-                Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (JSONException ex) {
-                Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (MalformedURLException ex) {
-                Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IOException ex) {
-                Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-                
+                try {
+                    URI uri;
+                    uri = new URI("http://freegeoip.net/json/"+str);
+                    System.out.println("URI : "+uri.toString());
+                    URL url = uri.toURL();
+
+                    InputStream inputStream = url.openStream();
+                    
+                    JSONTokener tokener = new JSONTokener(inputStream);
+                    JSONObject root = new JSONObject(tokener);
+                    //String rootJson = root.toString();
+                    //System.out.println("rootJson : "+rootJson);
+                    double lat = root.getDouble("latitude");
+                    double lng = root.getDouble("longitude");
+                    System.out.println("Latitude : "+lat+"\nLongitude : "+lng);
+                            
+                } catch (URISyntaxException ex) {
+                    Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (MalformedURLException ex) {
+                    Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                    Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (JSONException ex) {
+                    Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+ 
             }
             else
             {
@@ -92,7 +107,11 @@ public class FXMLDocumentController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         webEngine = wv_maps.getEngine();
-        webEngine.load("https://www.google.fr/maps");
+        //webEngine.load("https://www.google.fr/maps");
+
+        URL url2 = getClass().getResource("/resources/map.html");
+        String html =url2.toExternalForm();
+        webEngine.load(html);
         
     }    
     

@@ -72,7 +72,8 @@ public class FXMLDocumentController implements Initializable {
                 
                 try {
                     URI uri;
-                    uri = new URI("http://freegeoip.net/json/"+str);
+                    //uri = new URI("http://freegeoip.net/json/"+str);
+                    uri = new URI("http://ip-api.com/json/"+str);
                     System.out.println("URI : "+uri.toString());
                     URL url = uri.toURL();
 
@@ -82,8 +83,10 @@ public class FXMLDocumentController implements Initializable {
                     JSONObject root = new JSONObject(tokener);
                     //String rootJson = root.toString();
                     //System.out.println("rootJson : "+rootJson);
-                    double lat = root.getDouble("latitude");
-                    double lng = root.getDouble("longitude");
+                    /*double lat = root.getDouble("latitude");
+                    double lng = root.getDouble("longitude");*/
+                    double lat = root.getDouble("lat");
+                    double lng = root.getDouble("lon");
                     System.out.println("Latitude : "+lat+"\nLongitude : "+lng);
                             
                 } catch (URISyntaxException ex) {
